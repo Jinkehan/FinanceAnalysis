@@ -8,11 +8,17 @@
 import SwiftUI
 
 struct NewSpendingView: View {
+    @Binding var isPresented: Bool // Connects to HomeView to determine if newSpendingView is present
+    @State var spending = true
+    
+    
     var body: some View {
-        Text("New Spending View")
+        List {
+            Text("as")
+        }
     }
 }
 
 #Preview {
-    NewSpendingView()
+    NewSpendingView(isPresented: .constant(true))
 }

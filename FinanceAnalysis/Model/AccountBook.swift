@@ -8,15 +8,21 @@ import Foundation
 import SwiftData
 
 @Model
-final class AccountBook {
+final class AccountBook: Identifiable, Hashable {
+    var id: UUID
     private(set) var name: String
     private(set) var spendings: [SingleSpending]
     private(set) var categories: [SpendingCategory]
+    private(set) var notes: String
+    final var dateCreated: Date
 
-    init(name: String) {
+    init(name: String, notes: String) {
+        self.id = UUID()
         self.name = name
         self.spendings = []
         self.categories = []
+        self.notes = notes
+        self.dateCreated = Date()
         addCategories(name: "餐饮", icon: "fork.knife")
         addCategories(name: "超市", icon: "basket")
         addCategories(name: "饮料", icon: "takeoutbag.and.cup.and.straw")
@@ -31,8 +37,12 @@ final class AccountBook {
         addCategories(name: "住房", icon: "house")
     }
     
-    public func addSpending(amount: Double, time: Date, category: SpendingCategory) {
-        spendings.append(SingleSpending(amount: amount, time: time, category: category))
+    public func addSpending(amount: Double, time: Date, category: SpendingCategory, location: String, notes: String) {
+        var spendingLocation: String = ""
+        if (location != "") {
+            spendingLocation = location
+        }
+        spendings.append(SingleSpending(amount: amount, time: time, category: category, location: spendingLocation, notes: notes))
     }
     
     public func addCategories(name: String, icon: String) {

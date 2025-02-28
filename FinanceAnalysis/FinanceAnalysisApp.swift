@@ -12,8 +12,6 @@ import SwiftData
 struct FinanceAnalysisApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
-            SingleSpending.self,
             AccountBook.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
@@ -27,7 +25,7 @@ struct FinanceAnalysisApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
         .modelContainer(sharedModelContainer)
     }
